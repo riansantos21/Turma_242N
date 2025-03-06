@@ -1,130 +1,116 @@
-// Variáveis de jogo
-let palavraSecreta = '';  // Armazena a palavra que o jogador deve adivinhar.
-let letrasCorretas = [];  // Armazena as letras corretas que o jogador adivinhou até o momento.
-let letrasErradas = [];   // Armazena as letras erradas que o jogador tentou adivinhar.
-let tentativas = 5;       // Número de tentativas restantes para o jogador.
-let numeroDeLetras = 0;  // Número de letras da palavra secreta.
-  
-// Função para iniciar o jogo com a palavra inserida
-function iniciarJogo() {
-    // Obtém a palavra digitada pelo jogador, remove espaços extras e converte para minúsculas.
-    palavraSecreta = document.getElementById('input-palavra').value.trim().toLowerCase(); 
-    
-    // Verifica se o jogador digitou alguma palavra. Se não, exibe um alerta e interrompe o processo.
-    if (!palavraSecreta) {
-        alert("Por favor, digite uma palavra!");
-        return;
-    }
+// Lista de palavras para o jogo
+const palavras = ["avada-kedabra"]; // A lista de palavras que o jogo pode escolher aleatoriamente
+let palavraSecreta = ''; // Variável para armazenar a palavra secreta
+let letrasCorretas = []; // Array para armazenar as letras corretas que o jogador adivinha
+let letrasErradas = []; // Array para armazenar as letras erradas que o jogador tenta
+let tentativas = 3; // O número de tentativas iniciais do jogador
+let numeroDeLetras = 12; // Variável para armazenar o número de letras na palavra secreta
 
-    // Esconde a tela inicial (onde o jogador digita a palavra) e mostra a tela do jogo
-    document.getElementById('tela-inicial').style.display = 'none';
-    document.getElementById('tela-jogo').style.display = 'block';
+// Função para escolher uma palavra aleatória da lista
+function escolherPalavra() {
+    const indice = Math.floor(Math.random() * palavras.length); // Escolhe um índice aleatório da lista de palavras
+    //  Math.floor(): Essa função arredonda o número para baixo, transformando o valor decimal em um número inteiro. Por exemplo, se o valor obtido for 4.89, Math.floor() vai arredondá-lo para 4.
+    palavraSecreta = palavras[indice]; // A palavra secreta é escolhida
 
-    // Inicializa as variáveis do jogo
-    letrasCorretas = Array(palavraSecreta.length).fill('_'); // Cria um array de underscores do mesmo tamanho da palavra secreta
-    letrasErradas = [];  // Reseta a lista de letras erradas
-    tentativas = 5;      // Define o número inicial de tentativas
-    numeroDeLetras = palavraSecreta.length;  // Armazena o número de letras da palavra secreta
+    // Contando o número de letras na palavra secreta, ignorando os espaços
+    numeroDeLetras = palavraSecreta.replace(/ /g, '').length; // Conta apenas as letras, sem considerar os espaços
+     // replace(/ /g, ''): A função replace() é usada para substituir partes da string.
 
-    // Atualiza a visualização da palavra secreta e o número de tentativas
-    atualizarPalavra();
-    atualizarErros();
-    document.getElementById('mensagem').textContent = '';  // Limpa a mensagem de feedback
-    document.getElementById('imagem-acerto').style.display = 'none';  // Esconde a imagem de acerto
-    document.getElementById('imagem-erro').style.display = 'none';  // Esconde a imagem de erro
-    document.getElementById('tentativas-contagem').textContent = tentativas;  // Exibe o número de tentativas
-    document.getElementById('numero-letras').textContent = `Número de letras: ${numeroDeLetras}`;  // Exibe o número de letras da palavra secreta
+    // Substitui os espaços da palavra secreta por hífens para visualização
+    let palavraComHifen = palavraSecreta.replace(/ /g, '-'); // Troca espaços por hífens
+
+    letrasCorretas = Array(palavraComHifen.length).fill('_');  // Inicializa o array de letras corretas com '_'
+    // O método fill() em JavaScript é usado para preencher todos os elementos de um array com um valor fixo, a partir de um índice inicial até um índice final.
+    letrasErradas = []; // Reinicia o array de letras erradas
+    tentativas = 3; // Reinicia as tentativas para 5
+    atualizarPalavra(); // Atualiza a visualização da palavra secreta
+    atualizarErros(); // Atualiza a visualização do número de tentativas restantes
+    document.getElementById('mensagem').textContent = ''; // Limpa qualquer mensagem da tela
+    document.getElementById('imagem-acerto').style.display = 'none'; // Esconde a imagem de acerto
+    document.getElementById('imagem-erro').style.display = 'none'; // Esconde a imagem de erro
+    document.getElementById('tentativas-contagem').textContent = tentativas; // Exibe o número de tentativas restantes
+
+    // Atualiza o número de letras no jogo
+    document.getElementById('numero-letras').textContent = `Número de letras: ${numeroDeLetras}`;
 }
 
 // Função para atualizar a visualização da palavra secreta
 function atualizarPalavra() {
-    let palavraExibida = ''; // Variável que armazenará a visualização da palavra secreta
+    let palavraExibida = ''; // Inicializa uma variável para a palavra exibida
 
-    // Loop que percorre cada letra da palavra secreta
+    // Itera sobre a palavra secreta e revela as letras corretas, deixando espaços ou hífens
     for (let i = 0; i < palavraSecreta.length; i++) {
-        // Se a letra ainda não foi adivinhada (representada por '_'), exibe '_'
         if (letrasCorretas[i] === '_') {
-            palavraExibida += '_ ';
+            if (palavraSecreta[i] === ' ') {
+                palavraExibida += ' '; // Se for um espaço, mantém o espaço visível
+            } else if (palavraSecreta[i] === '-') {
+                palavraExibida += '-'; // Se for um hífen, mantém o hífen visível
+            } else {
+                palavraExibida += '_'; // Senão, mantém um traço indicando uma letra não adivinhada
+            }
         } else {
-            // Caso contrário, exibe a letra correta que o jogador adivinhou
-            palavraExibida += letrasCorretas[i] + ' ';
+            palavraExibida += letrasCorretas[i]; // Caso a letra já tenha sido adivinhada, exibe a letra
         }
+
+        // Adiciona um espaço após cada letra ou traço para separar visualmente
+        palavraExibida += ' ';
     }
-    
-    // Atualiza o HTML com a palavra exibida
-    document.getElementById('palavra-secreta').textContent = palavraExibida.trim();
+    // Atualiza o elemento HTML com a palavra visível
+    document.getElementById('palavra-secreta').textContent = palavraExibida.trim(); // Remove o último espaço extra
 }
 
-// Função para atualizar as tentativas restantes
+// Função para atualizar a contagem de tentativas restantes
 function atualizarErros() {
-    // Atualiza o número de tentativas restantes exibido na tela
-    document.getElementById('tentativas-contagem').textContent = tentativas;
+    document.getElementById('tentativas-contagem').textContent = tentativas; // Atualiza a contagem de tentativas
 }
 
 // Função para verificar se a letra digitada é correta ou errada
 function verificarLetra() {
-    // Obtém a letra digitada pelo jogador e converte para minúsculas
-    const letra = document.getElementById('letra').value.toLowerCase();
+    const letra = document.getElementById('letra').value.toLowerCase(); // Obtém a letra digitada e converte para minúscula
 
-    // Verifica se o jogador digitou mais de uma letra ou não digitou nada
-    if (!letra || letra.length > 1) {
-        alert("Por favor, digite apenas uma letra.");
-        return;
-    }
-
-    // Verifica se a letra já foi tentada (se foi correta ou errada anteriormente)
-    if (letrasErradas.includes(letra) || letrasCorretas.includes(letra)) {
-        alert("Você já tentou essa letra.");
-        return;
-    }
-
-    // Se a letra estiver presente na palavra secreta, é um acerto
-    if (palavraSecreta.includes(letra)) {
-        // Atualiza o array de letras corretas com a letra adivinhada
-        for (let i = 0; i < palavraSecreta.length; i++) {
-            if (palavraSecreta[i] === letra) {
-                letrasCorretas[i] = letra;  // Substitui o '_' pela letra correta
+    // Verifica se a letra não foi tentada antes e se não é uma letra vazia
+    if (letra && !letrasErradas.includes(letra) && !letrasCorretas.includes(letra)) {
+        // Se a letra estiver na palavra secreta
+        if (palavraSecreta.includes(letra)) {
+            for (let i = 0; i < palavraSecreta.length; i++) {
+                // Substitui os "_" pelas letras corretas na posição correspondente
+                if (palavraSecreta[i] === letra) {
+                    letrasCorretas[i] = letra;
+                }
             }
+            document.getElementById('mensagem').textContent = `Você acertou a letra: "${letra}"!`; // Exibe a mensagem de acerto
+            document.getElementById('mensagem').style.color = 'green'; // A mensagem fica verde
+            document.getElementById('imagem-acerto').style.display = 'block'; // Exibe a imagem de acerto
+            document.getElementById('imagem-erro').style.display = 'none'; // Esconde a imagem de erro
+        } else {
+            letrasErradas.push(letra); // Adiciona a letra errada ao array
+            tentativas--; // Diminui as tentativas
+            document.getElementById('mensagem').textContent = `Letra errada: "${letra}".`; // Exibe a mensagem de erro
+            document.getElementById('mensagem').style.color = 'red'; // A mensagem fica vermelha
+            document.getElementById('imagem-erro').style.display = 'block'; // Exibe a imagem de erro
+            document.getElementById('imagem-acerto').style.display = 'none'; // Esconde a imagem de acerto
         }
-        // Exibe mensagem de sucesso, muda a cor para verde e mostra a imagem de acerto
-        document.getElementById('mensagem').textContent = `Você acertou a letra: "${letra}"!`;
-        document.getElementById('mensagem').style.color = 'green';
-        document.getElementById('imagem-acerto').style.display = 'block';
-        document.getElementById('imagem-erro').style.display = 'none';
-    } else {
-        // Se a letra não estiver na palavra, é um erro
-        letrasErradas.push(letra);  // Adiciona a letra errada ao array de letras erradas
-        tentativas--;  // Diminui uma tentativa restante
-        // Exibe mensagem de erro, muda a cor para vermelha e mostra a imagem de erro
-        document.getElementById('mensagem').textContent = `Letra errada: "${letra}".`;
-        document.getElementById('mensagem').style.color = 'red';
-        document.getElementById('imagem-erro').style.display = 'block';
-        document.getElementById('imagem-acerto').style.display = 'none';
-    }
 
-    // Limpa o campo de texto onde a letra foi digitada
-    document.getElementById('letra').value = '';
-    
-    // Atualiza a visualização da palavra e o número de tentativas restantes
-    atualizarPalavra();
-    atualizarErros();
+        document.getElementById('letra').value = ''; // Limpa a caixa de entrada após o chute
+        atualizarPalavra(); // Atualiza a visualização da palavra secreta
+        atualizarErros(); // Atualiza o número de tentativas restantes
 
-    // Verifica se o jogador ganhou (se acertou todas as letras)
-    if (letrasCorretas.join('') === palavraSecreta) {
-        document.getElementById('mensagem').textContent = `Você ganhou! A palavra era: ${palavraSecreta}`;
-        document.getElementById('mensagem').style.color = 'green';  // Mensagem de vitória
-    } else if (tentativas <= 0) {
-        // Se o jogador perdeu todas as tentativas, exibe a mensagem de derrota
-        document.getElementById('mensagem').textContent = `Você perdeu! A palavra era: ${palavraSecreta}`;
-        document.getElementById('mensagem').style.color = 'red';  // Mensagem de derrota
+        // Verifica se o jogador adivinhou a palavra completamente
+        if (letrasCorretas.join('') === palavraSecreta.replace(/ /g, '-')) {
+            document.getElementById('mensagem').textContent = `Você ganhou! A palavra era: ${palavraSecreta}`; // Exibe a mensagem de vitória
+            document.getElementById('mensagem').style.color = 'green'; // A mensagem fica verde
+        } else if (tentativas <= 0) {
+            document.getElementById('mensagem').textContent = `Você perdeu! A palavra era: ${palavraSecreta}`; // Exibe a mensagem de derrota
+            document.getElementById('mensagem').style.color = 'red'; // A mensagem fica vermelha
+        }
     }
 }
 
 // Função para reiniciar o jogo
 function reiniciarJogo() {
-    // Exibe a tela inicial e esconde a tela do jogo
-    document.getElementById('tela-inicial').style.display = 'block';
-    document.getElementById('tela-jogo').style.display = 'none';
-    // Limpa o campo onde o jogador digitou a palavra secreta
-    document.getElementById('input-palavra').value = '';
+    escolherPalavra(); // Escolhe uma nova palavra
+    document.getElementById('mensagem').textContent = ''; // Limpa qualquer mensagem existente
 }
+
+// Inicia o jogo chamando a função escolherPalavra
+escolherPalavra();
