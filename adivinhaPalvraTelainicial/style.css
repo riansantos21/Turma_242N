@@ -1,126 +1,128 @@
-/* Estilo geral do corpo da página */
-body {
-    font-family: Arial, sans-serif; /* Definindo a fonte usada em todo o site */
-    display: flex; /* Usando o modelo flexbox para organizar o conteúdo */
-    flex-direction: column; /* Organizando os itens verticalmente */
-    justify-content: center; /* Centralizando horizontalmente o conteúdo */
-    align-items: center; /* Centralizando verticalmente o conteúdo */
-    height: 100vh; /* A altura ocupa 100% da altura da janela do navegador */
-    background-color: #f5f5f5; /* Cor de fundo suave para o corpo da página */
-    margin: 0; /* Removendo a margem padrão do navegador */
+
+/* estilo geral do corpo da pagina */
+body{
+    background-image: url(./imagens/Capturar213.PNG)  ;/*cor do fundo*/
+   /* background-size: cover;*/
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;/*tipo de fonte*/
+    display:flex; /*usando o modelo flecbox para organizar o conteudo*/
+    align-items: center;/* centralizar verticalmente o conteudo*/
+    height: 100vh; /*altura ocupa 100% da altura da janela do navegador */
+    margin: 0;/*remove a margem padrao do navegador */
+    text-decoration-color: rgb(255, 255, 255);
+}
+/*estilo da caixa que contem o conteudo principal do jogo*/
+
+.conteiner{
+    text-align: center; /*centraliza o texto dentro da caixa*/
+    width: 80%;/*a largura da caixa é de 80% de largura da tela*/
+    max-width: 500px;/*a largura maxima da caixa sera 500px}*/
+    margin:auto ;/*centraliza a caixa horizonalmente*/
+    background-color: rgb(0, 0, 0);
+    text-decoration-color: rgb(255, 255, 255);
 }
 
-/* Estilo da caixa que contém o conteúdo principal do jogo */
-.container {
-    text-align: center; /* Centraliza o texto dentro da caixa */
-    width: 80%; /* A largura da caixa é 80% da largura da tela */
-    max-width: 500px; /* A largura máxima da caixa será 500px */
-    margin: auto; /* Centraliza a caixa horizontalmente */
+/*organizando a imagem */
+#imagem-topo,#palavra-secreta{
+    display:inline-block; /*coloca a imagem e a palavra ao lado dos outros itens*/
+    vertical-align: middle;/*alinha verticalmente no centro */
+    margin: 10px;/*adiciona um pequeno espaço entre os itens*/
+    text-decoration-color: rgb(255, 255, 255);
+}
+/*colocando a imagem na parte superior*/
+#imagem-topo{
+    width: 150px;/*largura da imagem do topo*/
+    height: auto;/*mantem a proporçao da imagem*/
+    border-radius: 10px;/*arredonda as bordas */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);/*sombra suavis*/text-decoration-color: rgb(255, 255, 255);
 
 }
-
-/* Organiza a imagem do cachorro, a palavra secreta e o número de letras na horizontal */
-#imagem-dog, #palavra-secreta {
-    display: inline-block; /* Coloca a imagem e a palavra ao lado dos outros itens */
-    vertical-align: middle; /* Alinha verticalmente no centro */
-    margin: 10px; /* Adiciona um pequeno espaço entre os itens */
+/*estilo para a area onde a palavra secreta é mostrada */
+#palavra-secreta
+{
+    font-size: 2em;/*define o tamanho da fonte da palavra secreta (em é uma unidade de medida que significa o dobro da fonte */
 }
-
-/* Estilo da imagem do cachorro na parte superior */
-#imagem-dog {
-    width: 150px; /* Largura da imagem do cachorro */
-    height: auto; /* Mantém a proporção da imagem */
-    border-radius: 10px; /* Arredondando as bordas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+/* estilo da area para o numero de letras */
+#numero-letras{
+    font-size: 1.5em;/*tamanho da fonte para o numero de letras */
+    margin: 10px 0 ;/*espaço em cima e embaixo*/
 }
+/*estilo da area mensagens acerto/erro */
+#mensagens{
+    font-size: 1.2em;/*tamanho da fonte moderado para as mensagens */
+    margin: 20px;/*espacçamento ao redor da area */
 
-/* Estilo para a área onde a palavra secreta é mostrada */
-#palavra-secreta {
-    font-size: 2em; /* Define o tamanho da fonte da palavra secreta */
 }
+/*estilo para a caixa de entrada de letras*/
+input{
+    font-size: 1.2em;/*aumenta o tamanho da fonte na caixa de entrada */
+    padding: 5px;/*adiciona um pequeno espaco dentro da caixa de entrada */
 
-/* Estilo da área para o número de letras */
-#numero-letras {
-    font-size: 1.5em; /* Tamanho da fonte para o número de letras */
-    margin: 10px 0; /* Espaço em cima e embaixo */
 }
+/*estilo do botão */
+button{
+    font-size: 1.2em;/*define o tamanho da fonte do botão */
+    padding: 10px 20px;/*adiciona espacamento dentro do botao */
+    margin-top: 20px;/*espaco  a cima do botao */
+    background-color: rgb(40, 40, 64);/*cor do fundo do botao,bem  linha ;)*/
+    color: antiquewhite;/*remova a borda padrao do botao */
+    border: none;/*remove a borda padrao do botao*/
+    cursor: pointer;/*torna o cursor em uma mao quando passa sobre o botao*/
+    display: inline-block; /*coloca o botao ao lado dos outros itens*/
 
-/* Estilo da área de mensagens de acerto/erro */
-#mensagem {
-    font-size: 1.2em; /* Tamanho de fonte moderado para as mensagens */
-    margin: 20px; /* Espaçamento ao redor da área */
 }
+/*efeito quanto o usuario passar o nome sobre o botao */
+button:hover{
+    background-color: rgb(18, 18, 28);/*cor de fundo muda para essa ao passar o mouse */
 
-/* Estilo para a caixa de entrada de letras */
-input {
-    font-size: 1.2em; /* Aumenta o tamanho da fonte na caixa de entrada */
-    padding: 5px; /* Adiciona um pequeno espaço dentro da caixa de entrada */
-    margin-top: 20px; /* Adiciona um espaço acima da caixa */
-    display: inline-block; /* Coloca a caixa de entrada ao lado dos outros itens */
 }
+/*estilo para a contagem de tentavivas restantes */
+#tentativas-contagem{
+    font-size: 1.5em;/*define o tamanho da fonte da contagem de tentativas */
+    margin-top: 20px;/*adiciona um espaço acima da contagem */
 
 
-/* Estilo do botão */
-button {
-    font-size: 1.2em; /* Define o tamanho da fonte do botão */
-    padding: 10px 20px; /* Adiciona espaçamento dentro do botão */
-    margin-top: 20px; /* Espaço acima do botão */
-    background-color: #4CAF50; /* Cor de fundo verde */
-    color: white; /* Cor do texto é branca */
-    border: none; /* Remove a borda padrão do botão */
-    cursor: pointer; /* Torna o cursor em uma mão quando passa sobre o botão */
-    display: inline-block; /* Coloca o botão ao lado de outros itens */
 }
+/*estilo para as imagens de acerto e erro */
+#imagem-acerto, #imagem-erro{
+    width: 150px;/*define o tamanho das imagem de acerto e erro */
+    height: 250px;/*define a altura das imagens */
+    object-fit: cover;/*ajustar a imagem para cobrir a area sem distorcao */
+    margin: 20px auto;/*centraliza as imagens */
+    display:none;/*inicialmente ,as imagens nao sao exibidas */
+    border-radius: 50%;/*torna as imagens redondas */
 
-/* Efeito quando o usuário passa o mouse sobre o botão */
-button:hover {
-    background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
+
 }
-
-/* Estilo para a contagem de tentativas restantes */
-#tentativas-contagem {
-    font-size: 1.5em; /* Define o tamanho da fonte da contagem de tentativas */
-    font-weight: bold; /* Torna a fonte em negrito */
-    margin-top: 20px; /* Adiciona um espaço acima da contagem */
+h1{
+    color: blanchedalmond;
 }
-
-/* Estilo para as imagens de acerto e erro */
-#imagem-acerto, #imagem-erro {
-    width: 150px; /* Define o tamanho das imagens de acerto e erro */
-    height: 150px; /* Define a altura das imagens */
-    object-fit: cover; /* Ajusta a imagem para cobrir a área sem distorção */
-    margin: 20px auto; /* Centraliza as imagens */
-    display: none; /* Inicialmente, as imagens não são exibidas */
-    border-radius: 50%; /* Torna as imagens redondas */
+h2{color: blanchedalmond; }
+h3{
+color: blanchedalmond;
 }
+/*estilo para a linha com os botoes */
+.buttons{
+    display: flex;/*usando flexbox para os botoes ficarem em linhas */
+    justify-content: center;/*centralizando os botoes na linha */
+    margin-top: 20px;/*espaço acima da linha de botoes */
+    width: 100%;/*garante que os botoes ocupem a largura total da tela */
 
-/* Estilo para a linha com os botões */
-.buttons {
-    display: flex; /* Usando flexbox para os botões ficarem em linha */
-    justify-content: center; /* Centraliza os botões na linha */
-    margin-top: 20px; /* Espaço acima da linha de botões */
-    width: 100%; /* Garante que os botões ocupem a largura total da tela */
 }
+/*estilo dos botoes de acao (chutar e reiniciar)*/
+.buttons button{
+    font-size: 1.2em;/*tamanho da fonte */
+    padding: 10px 20px ;/*espaçamento  detro dos botoes */
+    background-color: rgb(43, 43, 115);/*cor do fundo */
+    color: rgb(46, 46, 86);/*cor do texto*/
+    border:none ; /*remove a borda */
+    cursor: pointer;/*mao ne pessoal :)*/
+    transition: backgraund-color 0.3s ;/*transiçao suave na mudanca de cor */
+    margin :0 10px;/*espaço entre os botoes */
 
-/* Estilo dos botões de ação (Chutar e Reiniciar) */
-.buttons button {
-    font-size: 1.2em; /* Tamanho da fonte */
-    padding: 10px 20px; /* Espaçamento dentro dos botões */
-    background-color: #4CAF50; /* Cor de fundo verde */
-    color: white; /* Cor do texto */
-    border: none; /* Remove a borda padrão */
-    cursor: pointer; /* Torna o cursor em forma de mão */
-    transition: background-color 0.3s; /* Transição suave na mudança de cor */
-    margin: 0 10px; /* Espaço entre os botões */
+
 }
-
-/* Efeito quando o usuário passa o mouse sobre os botões */
-.buttons button:hover {
-    background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
-}
-
-/* Organiza os botões na horizontal, mantendo o layout alinhado */
-input, button, .buttons {
-    display: inline-block; /* Coloca os elementos em linha */
-    margin-top: 10px; /* Margem para espaçamento entre os itens */
+/*organizar os botoes na horizontal ,mantendo layout alinhado*/
+input,button, .buttons{
+    display:inline-block;/*coloca elementos em linha*/
+    margin-top: 10px;/*margem para o espaçamento entre os itens */
 }
